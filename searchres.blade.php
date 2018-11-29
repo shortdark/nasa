@@ -17,9 +17,6 @@
             html,body {
                 height: 100%;
             }
-            .flex-fill {
-                flex:1 1 auto;
-            }
         </style>
 
     </head>
