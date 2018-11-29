@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/searchres', function () {
+Route::get('/nasa', function () {
     return view('searchres');
 });
+
+Route::get('/nasa/{media}/{id}', "SearchResultsController@show");
 
 

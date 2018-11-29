@@ -23,26 +23,35 @@
     <body class="bg-light">
 
             <div class="container-fluid h-100">
-                <div class="row h-100 align-top">
+                <div class="h-100 align-top">
                     <h1 class="display-3 text-center">NASA API Explorer</h1>
 
                     <div id="app" class="d-block w-100">
 
-                        <h2 class="display-3 text-center" v-if="this.txtInput">Search results for: @{{ this.txtInput }}</h2>
+                        <h2 class="text-center" v-if="this.txtInput">Search results for: @{{ this.txtInput }} and @{{ this.mediaType }}</h2>
 
-                        <div v-for="result in results">
+
+                            <div v-for="result in results">
                                 <div v-for="item in result.items" class="col-3 d-inline-block">
-                                    {{-- Use the collection.json (item.href) to get the large jpg url --}}
                                     <div v-for="(data, index) in item.data">
-                                        <div>@{{ data.title }}</div>
-                                        <div>
-                                            <a v-bind:href="'/nasa/'+data.nasa_id+'/'" v-bind:alt="data.title">
-                                                <img v-bind:src="item.links[index].href" v-bind:title="data.title" class="img-fluid img-thumbnail">
-                                            </a>
-                                        </div>
+
+                                            <div v-if="data.media_type === 'image'">
+                                                <div>@{{ data.title }}</div>
+                                                <a v-bind:href="'/nasa/image/'+data.nasa_id+'/'" v-bind:alt="data.title">
+                                                    <img v-bind:src="item.links[index].href" v-bind:title="data.title" class="img-fluid img-thumbnail">
+                                                </a>
+                                            </div>
+                                            <div v-else>
+                                                <a v-bind:href="'/nasa/audio/'+data.nasa_id+'/'" v-bind:alt="data.title">
+                                                    @{{ data.title }}
+                                                </a>
+
+                                            </div>
+
                                     </div>
                                 </div>
-                        </div>
+                            </div>
+
 
                         <div class="col-6 d-block mx-auto">
 

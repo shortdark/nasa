@@ -10,7 +10,7 @@ const app = new Vue({
             if (this.txtInput && this.mediaType) {
                 axios.get("https://images-api.nasa.gov/search?q="+this.txtInput+"&media_type="+this.mediaType)
                     .then(response  => this.results = response.data);
-                this.mediaType = null;
+                // this.mediaType = null;
             }
         }
     }
