@@ -9,9 +9,10 @@
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+
             <div class="content">
-                <div id="app">
+                <h1>NASA API Explorer</h1>
+                <div id="app" style="">
                     <input id="txtName" v-on:keyup.enter="getItems" v-model="txtInput" type="text"><br>
                     <input type="radio" id="image" value="image" name="image" v-model="mediaType">
                     <label for="image">Image</label>
@@ -21,17 +22,15 @@
                     <div v-for="result in results">
                             <div v-for="item in result.items" style="display: inline-block; width: 300px; height: 300px; margin: 2px;">
                                 {{-- Get the nasa_id to use in the url and use the collection.json (item.href) to get the large jpg url --}}
-                                <div v-for="data in item.data">
+                                <div v-for="(data, index) in item.data">
                                     @{{ data.title }}<br>
-                                </div>
-                                <div v-for="link in item.links">
-                                    <img v-bind:src="link.href" style="width: 300px; height: 200px;">
+                                    <a v-bind:href="'/nasa/'+data.nasa_id+'/'" v-bind:alt="data.title"><img v-bind:src="item.links[index].href" v-bind:title="data.title" style="width: 300px; height: 200px;"></a>
                                 </div>
                             </div>
                     </div>
+                    <input type="button" value="submit" v-on:click="getItems">
                 </div>
             </div>
-        </div>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
